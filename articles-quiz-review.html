@@ -1,0 +1,313 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2685.2">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">import React, { useState } from 'react';</p>
+<p class="p1">import { CheckCircle, XCircle, Trophy, RefreshCw, User, BookOpen } from 'lucide-react';</p>
+<p class="p2"><br></p>
+<p class="p1">const QuizReview = () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const paragraph = "Last week, I downloaded ___ new app that helps students manage their time better. ___ app is called StudyBuddy, and it was recommended by ___ friend in my psychology class. Like many students, I waste ___ hour or two every day scrolling through ___ social media. ___ Instagram and TikTok are ___ biggest distractions for me. According to ___ data it collected, I spend about three hours per day on ___ entertainment apps! Now I'm trying to make ___ change by turning off ___ notifications on my phone. If you're ___ student who struggles with ___ time management, I definitely recommend trying this app.";</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const answers = ["a", "the", "a", "an", "no article", "no article", "the", "the", "no article", "a", "the", "a", "no article"];</p>
+<p class="p2"><span class="Apple-converted-space">  </span></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const explanations = [</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"Use 'a' before 'new' (consonant sound) when mentioning the app for the first time.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"Use 'the' for the specific app mentioned in the previous sentence.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"Use 'a' before 'friend' (consonant sound) - one friend among many.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"Use 'an' before 'hour' (silent h makes a vowel sound).",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"No article before 'social media' - it's a general concept.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"No article before 'Instagram' - it's a proper name/brand.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"Use 'the' before the superlative 'biggest'.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"Use 'the' for the specific data mentioned (from the app).",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"No article before 'entertainment' when used as a general adjective describing types of apps.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"Use 'a' before 'change' (consonant sound) - making one change.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"Use 'the' for the specific notifications on my phone.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"Use 'a' before 'student' (consonant sound) - any student.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"No article before 'time management' - it's a general concept/skill."</p>
+<p class="p1"><span class="Apple-converted-space">  </span>];</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const [screen, setScreen] = useState('intro');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const [studentName, setStudentName] = useState('');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const [currentBlank, setCurrentBlank] = useState(0);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const [userAnswers, setUserAnswers] = useState(Array(13).fill(null));</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const [showResults, setShowResults] = useState(false);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const startReview = () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if (studentName.trim()) {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>setScreen('review');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const handleAnswer = (option) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const newAnswers = [...userAnswers];</p>
+<p class="p1"><span class="Apple-converted-space">    </span>newAnswers[currentBlank] = option;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>setUserAnswers(newAnswers);</p>
+<p class="p2"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>if (currentBlank &lt; 12) {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>setCurrentBlank(currentBlank + 1);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>setShowResults(true);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const resetReview = () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>setScreen('intro');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>setStudentName('');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>setCurrentBlank(0);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>setUserAnswers(Array(13).fill(null));</p>
+<p class="p1"><span class="Apple-converted-space">    </span>setShowResults(false);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const renderParagraph = () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const parts = paragraph.split('___');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>return parts.map((part, idx) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;span key={idx}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{part}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{idx &lt; parts.length - 1 &amp;&amp; (</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;span className={`font-bold px-2 py-1 rounded ${</p>
+<p class="p1"><span class="Apple-converted-space">            </span>idx === currentBlank &amp;&amp; !showResults</p>
+<p class="p1"><span class="Apple-converted-space">              </span>? 'bg-gray-300'</p>
+<p class="p1"><span class="Apple-converted-space">              </span>: userAnswers[idx]</p>
+<p class="p1"><span class="Apple-converted-space">              </span>? userAnswers[idx] === answers[idx]</p>
+<p class="p1"><span class="Apple-converted-space">                </span>? 'text-green-600'</p>
+<p class="p1"><span class="Apple-converted-space">                </span>: 'text-red-600'</p>
+<p class="p1"><span class="Apple-converted-space">              </span>: ''</p>
+<p class="p1"><span class="Apple-converted-space">          </span>}`}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{showResults || idx &lt; currentBlank</p>
+<p class="p1"><span class="Apple-converted-space">              </span>? userAnswers[idx] === 'no article' ? 'X' : userAnswers[idx]</p>
+<p class="p1"><span class="Apple-converted-space">              </span>: '___'}</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>));</p>
+<p class="p1"><span class="Apple-converted-space">  </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const score = userAnswers.filter((ans, idx) =&gt; ans === answers[idx]).length;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>// Introduction screen</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if (screen === 'intro') {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>return (</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div className="min-h-screen bg-gradient-to-br from-gray-100 to-slate-200 flex items-center justify-center p-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div className="bg-white rounded-2xl shadow-2xl p-8 max-w-2xl w-full"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div className="text-center mb-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div className="bg-gray-200 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;BookOpen className="w-10 h-10 text-gray-700" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h1 className="text-4xl font-bold text-gray-800 mb-2"&gt;Articles Quiz Review&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h2 className="text-xl font-semibold text-gray-600"&gt;Practice Before Your In-Person Quiz&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">          </span></p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div className="bg-blue-50 border-2 border-blue-300 rounded-lg p-6 mb-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h3 className="font-bold text-lg text-gray-800 mb-3"&gt;📋 Instructions:&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;ul className="space-y-2 text-gray-700"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;li className="flex items-start gap-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span className="font-bold min-w-fit"&gt;•&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span&gt;This is a &lt;strong&gt;completion grade&lt;/strong&gt; - you get credit for doing it, not for your score&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;li className="flex items-start gap-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span className="font-bold min-w-fit"&gt;•&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span&gt;Read the paragraph and fill in each blank with the correct article&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;li className="flex items-start gap-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span className="font-bold min-w-fit"&gt;•&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span&gt;You'll get instant feedback with explanations&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;li className="flex items-start gap-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span className="font-bold min-w-fit"&gt;•&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span&gt;Take a &lt;strong&gt;screenshot&lt;/strong&gt; of your final result&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;li className="flex items-start gap-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span className="font-bold min-w-fit"&gt;•&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span&gt;Submit it to &lt;strong&gt;Professor Bishop&lt;/strong&gt; by Sunday night&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/ul&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div className="mb-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;label className="block text-sm font-semibold text-gray-700 mb-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>Enter your name:</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;input</p>
+<p class="p1"><span class="Apple-converted-space">              </span>type="text"</p>
+<p class="p1"><span class="Apple-converted-space">              </span>value={studentName}</p>
+<p class="p1"><span class="Apple-converted-space">              </span>onChange={(e) =&gt; setStudentName(e.target.value)}</p>
+<p class="p1"><span class="Apple-converted-space">              </span>onKeyPress={(e) =&gt; e.key === 'Enter' &amp;&amp; startReview()}</p>
+<p class="p1"><span class="Apple-converted-space">              </span>placeholder="Your full name"</p>
+<p class="p1"><span class="Apple-converted-space">              </span>className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-gray-500 focus:outline-none text-lg"</p>
+<p class="p1"><span class="Apple-converted-space">              </span>autoFocus</p>
+<p class="p1"><span class="Apple-converted-space">            </span>/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">          </span></p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;button</p>
+<p class="p1"><span class="Apple-converted-space">            </span>onClick={startReview}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>disabled={!studentName.trim()}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>className={`w-full py-3 rounded-lg font-semibold text-lg transition ${</p>
+<p class="p1"><span class="Apple-converted-space">              </span>studentName.trim()</p>
+<p class="p1"><span class="Apple-converted-space">                </span>? 'bg-gray-700 text-white hover:bg-gray-800'</p>
+<p class="p1"><span class="Apple-converted-space">                </span>: 'bg-gray-300 text-gray-500 cursor-not-allowed'</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}`}</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>Start Review</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>// Results screen</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if (showResults) {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const percentage = Math.round((score / 13) * 100);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const currentDate = new Date().toLocaleDateString();</p>
+<p class="p2"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>return (</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div className="min-h-screen bg-gradient-to-br from-gray-100 to-slate-200 flex items-center justify-center p-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div className="bg-white rounded-2xl shadow-2xl p-8 max-w-3xl w-full"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div className="text-center mb-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;Trophy className="w-16 h-16 mx-auto mb-4 text-gray-600" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h2 className="text-3xl font-bold text-gray-800 mb-2"&gt;Review Complete!&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p className="text-gray-600"&gt;Review your answers and explanations below&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">          </span></p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div className="bg-gray-100 rounded-lg p-6 mb-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div className="text-lg font-semibold text-gray-700 mb-1"&gt;Student Name:&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div className="text-2xl font-bold text-gray-700 mb-4"&gt;{studentName}&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div className="text-lg font-semibold text-gray-700 mb-1"&gt;Your Score:&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p className="text-5xl font-bold text-gray-700 mb-2"&gt;{score}/13&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p className="text-xl text-gray-600 mb-4"&gt;{percentage}%&lt;/p&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div className="text-base bg-blue-100 text-blue-800 p-3 rounded-lg font-semibold"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>✓ Completion Credit Earned</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div className="text-sm text-gray-500 mt-4"&gt;{currentDate}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div className="bg-yellow-50 border-2 border-yellow-300 rounded-lg p-4 mb-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p className="font-bold text-gray-800 mb-2"&gt;📸 IMPORTANT:&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p className="text-sm text-gray-700"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>Take a screenshot of this page and submit it to &lt;strong&gt;Professor Bishop&lt;/strong&gt; by Sunday night for completion credit.</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div className="bg-white border-2 border-gray-300 rounded-lg p-6 mb-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h3 className="font-bold text-xl text-gray-800 mb-4"&gt;📖 Paragraph with Your Answers:&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p className="text-lg text-gray-700 leading-relaxed mb-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>{renderParagraph()}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div className="space-y-4 mb-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h3 className="font-bold text-xl text-gray-800"&gt;📝 Answer Review:&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{answers.map((correctAnswer, idx) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div key={idx} className={`p-4 rounded-lg border-2 ${</p>
+<p class="p1"><span class="Apple-converted-space">                </span>userAnswers[idx] === correctAnswer</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>? 'bg-green-50 border-green-300'</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>: 'bg-red-50 border-red-300'</p>
+<p class="p1"><span class="Apple-converted-space">              </span>}`}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div className="flex items-start gap-3 mb-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>{userAnswers[idx] === correctAnswer ? (</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;CheckCircle className="w-6 h-6 text-green-600 flex-shrink-0 mt-1" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>) : (</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;XCircle className="w-6 h-6 text-red-600 flex-shrink-0 mt-1" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;div className="flex-1"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div className="font-semibold text-gray-800 mb-1"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                      </span>Blank #{idx + 1}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div className="text-sm"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                      </span>&lt;span className="font-semibold"&gt;Your answer: &lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                      </span>&lt;span className={userAnswers[idx] === correctAnswer ? 'text-green-700' : 'text-red-700'}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>{userAnswers[idx]}</p>
+<p class="p1"><span class="Apple-converted-space">                      </span>&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                      </span>{userAnswers[idx] !== correctAnswer &amp;&amp; (</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span className="text-gray-700"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                          </span>{' '} → Correct answer: &lt;strong&gt;{correctAnswer}&lt;/strong&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                      </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div className="text-sm text-gray-700 mt-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                      </span>&lt;strong&gt;Explanation:&lt;/strong&gt; {explanations[idx]}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>))}</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">          </span></p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;button</p>
+<p class="p1"><span class="Apple-converted-space">            </span>onClick={resetReview}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>className="bg-gray-700 text-white px-8 py-3 rounded-lg font-semibold hover:bg-gray-800 transition flex items-center gap-2 mx-auto"</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;RefreshCw className="w-5 h-5" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>Try Again</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>// Review screen</p>
+<p class="p1"><span class="Apple-converted-space">  </span>return (</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div className="min-h-screen bg-gradient-to-br from-gray-100 to-slate-200 flex items-center justify-center p-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div className="bg-white rounded-2xl shadow-2xl p-8 max-w-3xl w-full"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div className="flex justify-between items-center mb-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div className="flex items-center gap-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;User className="w-5 h-5 text-gray-700" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;span className="font-semibold text-gray-700"&gt;{studentName}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div className="text-sm font-semibold text-gray-600"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>Blank {currentBlank + 1} / 13</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div className="flex items-center gap-2 bg-gray-200 px-4 py-2 rounded-full"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;span className="font-bold text-gray-700"&gt;{currentBlank}/13&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div className="mb-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div className="w-full bg-gray-200 rounded-full h-2 mb-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div</p>
+<p class="p1"><span class="Apple-converted-space">              </span>className="bg-gray-700 h-2 rounded-full transition-all duration-300"</p>
+<p class="p1"><span class="Apple-converted-space">              </span>style={{ width: `${((currentBlank + 1) / 13) * 100}%` }}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">          </span></p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;h3 className="text-2xl font-bold text-gray-800 mb-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>Fill in blank #{currentBlank + 1}:</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div className="bg-gray-50 p-6 rounded-lg border-2 border-gray-300 mb-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p className="text-xl text-gray-700 leading-relaxed"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>{renderParagraph()}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div className="grid grid-cols-2 gap-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>{["a", "an", "the", "no article"].map((option, idx) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button</p>
+<p class="p1"><span class="Apple-converted-space">              </span>key={idx}</p>
+<p class="p1"><span class="Apple-converted-space">              </span>onClick={() =&gt; handleAnswer(option)}</p>
+<p class="p1"><span class="Apple-converted-space">              </span>className="p-4 rounded-xl font-semibold text-lg transition-all bg-gray-100 hover:bg-gray-200 text-gray-800 hover:scale-105"</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>{option}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>))}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>);</p>
+<p class="p1">};</p>
+<p class="p2"><br></p>
+<p class="p1">export default QuizReview;</p>
+</body>
+</html>
